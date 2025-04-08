@@ -66,6 +66,7 @@ export default function Home() {
               <div className="relative">
                 <Input 
                 id = "patientspassword"
+                type = {showPPassword?"text":"password"}
                 value = {ppassword}
                 onChange={(e) => setPPassword(e.target.value)}
                 required
@@ -79,7 +80,29 @@ export default function Home() {
                 </button>
               </div>
             </div>
+            <div className="flex items-center justify-between">
+              <div className = "flex items-center space-x-2">
+                <Checkbox id="remember me"/>
+                <Label htmlFor="remember">Remember me</Label>
+              </div>
+              <a href="#" className="text-sm text-primary-500 hover:text-primary-600">Have an account? Login</a>
+            </div>
+            <Button type="submit" className="w-full">
+              Sign up
+            </Button>
           </form>
+          <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t"/>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className = "bg-white px-2 text-muted-foreground">Or continue as</span>
+              </div>
+          </div>
+          <div className="text-center text-sm">
+            Hospital Admin?{" "}
+            <a href="#" className = "text-primary-500 hover:text-primary-600 font-medium">Log in</a>
+          </div>
         </div>
       </motion.div>
     </div>
