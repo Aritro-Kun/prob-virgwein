@@ -9,11 +9,11 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary-50 to-white">
         <div className="flex items-center justify-between px-6 py-4 shadow-sm bg-white">
-        <div className="text-2xl font-bold text-primary">FeedbackAI</div>
-        <Button asChild>
-          <a href="/signup">Sign Up</a>
-        </Button>
-      </div>
+            <div className="text-2xl font-bold text-primary">Feedback.ai</div>
+            <Button asChild>
+            <a href="/signup">Sign Up</a>
+            </Button>
+        </div>
       <div className="flex flex-col items-center justify-center h-[80vh] text-center px-4">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
@@ -21,7 +21,9 @@ export default function HomePage() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-extrabold max-w-3xl"
         >
-          Now submit your feedbacks after getting discharged from your hospital.
+            <div>Discharged? Great.</div>
+            <div>Now continue your recovery -</div>
+            <div>via text, video or audio.</div>            
         </motion.h1>
       </div>
       <div className="bg-primary-50 py-12 overflow-hidden">
@@ -48,7 +50,7 @@ export default function HomePage() {
               "Apollo Nexus",
               "Trinity Health",
               "CareFirst",
-              "CityCare Hospital", // duplicate to loop smoothly
+              "CityCare Hospital",
               "Greenfield Medical",
               "Nova Health",
               "Wellbeing Clinic",
