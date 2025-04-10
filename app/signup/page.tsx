@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Mail } from "lucide-react";
+import { error } from "console";
 
 export default function Home() {
   const [pname, setPName] = useState('');
@@ -14,6 +15,35 @@ export default function Home() {
   const [pmail, setPMail] = useState('');
   const [ppassword, setPPassword] = useState('');
   const [showPPassword, setShowPPassword] = useState(false);
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(pmail)){
+      alert("Please enter a valid email address.");
+      return;
+    }
+    const payload = {
+      patient_name: pname,
+      patient_id: pid,
+      patient_mail: pmail,
+      password: ppassword,
+    };
+    try{
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload),
+      })
+      const data = await res.json();
+      if(!res.ok){
+        throw new Error(data.message || 'Signup failed.')
+      }
+      window.location.href = "/checkmail"
+    }catch(error){
+      alert(error.message);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center p-4">
       <motion.div
@@ -27,7 +57,7 @@ export default function Home() {
             <h1 className = "text-3xl font-bold tracking-tighter">Welcome</h1>
             <p className = "text-muted-foreground">Sign-up to start getting access</p>
           </div>
-          <form className = "space-y-10">
+          <form className = "space-y-10" onSubmit={handleSubmit}>
             <div className = "space-y-2">
               <Label htmlFor="patientname">Patient Name</Label>
               <Input
@@ -85,7 +115,7 @@ export default function Home() {
                 <Checkbox id="remember me"/>
                 <Label htmlFor="remember">Remember me</Label>
               </div>
-              <a href="#" className="text-sm text-primary-500 hover:text-primary-600">Have an account? Login</a>
+              <a href="/login" className="text-sm text-primary-500 hover:text-primary-600">Have an account? Login</a>
             </div>
             <Button type="submit" className="w-full">
               Sign up
@@ -101,7 +131,7 @@ export default function Home() {
           </div>
           <div className="text-center text-sm">
             Hospital Admin?{" "}
-            <a href="#" className = "text-primary-500 hover:text-primary-600 font-medium">Log in</a>
+            <a href="/hlogin" className = "text-primary-500 hover:text-primary-600 font-medium">Log in</a>
           </div>
         </div>
       </motion.div>
